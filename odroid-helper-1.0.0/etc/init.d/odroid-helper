@@ -1,0 +1,49 @@
+#!/bin/sh
+# Start/stop the cron daemon.
+#
+### BEGIN INIT INFO
+# Provides:          odroid-helper
+# Required-Start:    $network $syslog
+# Required-Stop:     $network $syslog
+# Should-Start:      
+# Should-Stop:       
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Odroid prometheus helper
+# Description:       Prometheus helper to control odroid's thermal state
+### END INIT INFO
+
+DESC="prometheus odroid helper"
+NAME=odroid-helper
+DAEMON=/usr/bin/odroid-helper
+PIDFILE=/var/run/odroid-helper.pid
+SCRIPTNAME=/etc/init.d/"$NAME"
+
+test -f $DAEMON || exit 0
+
+PATH=/sbin:/bin:/usr/sbin:/usr/bin
+. /lib/lsb/init-functions
+
+case "$1" in
+start)	log_daemon_msg "Starting $DESC" "odroid-helper"
+        start-stop-daemon --start --background --pidfile $PIDFILE --make-pidfile --startas $DAEMON
+        log_end_msg $?
+	;;
+stop)	log_daemon_msg "Stopping $DESC" "odroid-helper"
+        start-stop-daemon --stop --pidfile $PIDFILE --retry 10
+        RETVAL=$?
+        [ $RETVAL -eq 0 ] && [ -e "$PIDFILE" ] && rm -f $PIDFILE
+        log_end_msg $RETVAL
+        ;;
+restart) log_daemon_msg "Restarting $DESC" "odroid-helper" 
+        $0 stop
+        $0 start
+        ;;
+status)
+        status_of_proc -p $PIDFILE $DAEMON $NAME && exit 0 || exit $?
+        ;;
+*)	log_action_msg "Usage: $SCRIPTNAME {start|stop|status|restart}"
+        exit 2
+        ;;
+esac
+exit 0

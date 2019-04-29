@@ -1,0 +1,14 @@
+Source: odroid-helper
+Section: unknown
+Priority: optional
+Maintainer: Dmitry Pereslegin <dmitry@pereslegin.ru>
+Build-Depends: debhelper (>= 11)
+Standards-Version: 4.1.3
+Homepage: http://github.com/autowp/odroid-helper
+Vcs-Browser: http://github.com/autowp/odroid-helper
+Vcs-Git: http://github.com/autowp/odroid-helper.git
+Package: odroid-helper
+Architecture: armhf
+#Depends: ${misc:Depends}
+Description: Odroid helper providing prometheus exporter
+Version: 1.0.0

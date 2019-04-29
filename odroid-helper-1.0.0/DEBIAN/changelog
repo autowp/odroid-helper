@@ -1,0 +1,5 @@
+odroid-helper (1.0.0-1) unstable; urgency=medium
+
+  * Initial release (Closes: #nnnn)  <nnnn is the bug number of your ITP>
+
+ -- Dmitry Pereslegin <dmitry@pereslegin.ru>  Mon, 29 Apr 2019 22:16:44 +0300
