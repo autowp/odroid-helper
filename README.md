@@ -9,7 +9,7 @@ wget https://github.com/autowp/odroid-helper/releases/download/v1.0.0/odroid-hel
 dpkg -i odroid-helper-1.0.0.deb
 ```
 
-Start/top service
+Start/stop service
 ```
 systemctl start odroid-helper
 systemctl stop odroid-helper
